@@ -44,7 +44,6 @@ def processLap(laneId, lap, lapDelta):
 def startRace(threads=2):
     pool = ThreadPool(threads)
 
-    # lanes = [{'gpioPin': laneOne, 'laneId':"1"}, {'gpioPin': laneTwo, 'laneId':"2"}]
     lanes = [LaneInfo(laneOne, "1"), LaneInfo(laneTwo, "2")]
     
     pool.map(timeLaps, lanes)
