@@ -1,12 +1,15 @@
+import sys
 import RPi.GPIO as GPIO
 import time
 import datetime
 from lane_info import LaneInfo
+from race_results import RaceResults
 from multiprocessing.dummy import Pool as ThreadPool
 
 laneOne = 17
 laneTwo = 18
 maxLaps = 10
+raceResults = RaceResults()
 
 def timeLaps(laneInfo):
     # type: (LaneInfo) -> None
@@ -39,6 +42,7 @@ def processLap(laneId, lap, lapDelta):
     # type: (str, int, datetime) -> None
     """Times the laps for a given lane"""
     #print lap info
+    raceResults.addResult(laneId, lapDelta)
     print("Car " + laneId + " - Lap " + str(lap) + " " + str(lapDelta.total_seconds()))
 
 def startRace(threads=2):
@@ -50,7 +54,11 @@ def startRace(threads=2):
     pool.close()
     pool.join()
 
+    raceResults.printResults()
+
 def setup():
+    if len(sys.argv) == 2:
+        maxLaps = sys.argv[1]
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(laneOne,GPIO.IN)
     GPIO.setup(laneTwo,GPIO.IN)
