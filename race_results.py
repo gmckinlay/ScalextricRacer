@@ -32,6 +32,6 @@ class RaceResults:
                 print("Lap "+ str(lapNum) + "\t" + str(lap) + " seconds")
 
             print("Fastest Lap\t" + str(self.fastestLap(lane)) + " seconds")
-            print("Slowest Lap\t" + str(self.fastestLap(lane)) + " seconds")
-            print("Average Lap\t" + str(self.fastestLap(lane)) + " seconds")
-            print("Total Time\t" + str(self.fastestLap(lane)) + " seconds")
+            print("Slowest Lap\t" + str(self.slowestLap(lane)) + " seconds")
+            print("Average Lap\t" + str(self.averageTime(lane)) + " seconds")
+            print("Total Time\t" + str(self.totalTime(lane)) + " seconds")
